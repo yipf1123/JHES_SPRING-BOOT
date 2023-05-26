@@ -7,10 +7,14 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.study.springboot.dto.ShopDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -93,9 +97,11 @@ public class ShopController {
 		return "input";
 	}
 	
+	// get으로 전달하는 것
+	// 
 	@ResponseBody
 	@RequestMapping("/api/getBagList")
-	public List getBagList() {
+	public List getBagList(int count) {
 		List list_item = new ArrayList();
 		
 		Map info = new HashMap();
@@ -104,11 +110,42 @@ public class ShopController {
 		info.put("desc", "여성 카세트 크로스백 - 페러킷");
 		info.put("price", "1,380,000");
 		
-		list_item.add(info);
-		list_item.add(info);
-		list_item.add(info);
+		for(int i=0; i<count; i++) {
+			
+			list_item.add(info);
+		}
+
 	
 		return list_item;
+	}
+	
+	@RequestMapping ("/js_store")
+	public String js_store() {
+		
+		return "js_store";
+	}
+	
+	@RequestMapping ("/send2")
+	@ResponseBody
+	public List send2(
+			//Map을 이용하는 방법; 전부 받아줌	
+			@RequestParam Map paramMap, 		
+			
+			// 주소의 query string('?' 이후에 key=value 형태를 받음)
+			// 따라서 post 일때는 못 받음
+			@ModelAttribute ShopDTO shopDTO,
+			
+			// post 방식으로 json 받음
+			@RequestBody ShopDTO shopDTO2
+			) {
+		System.out.println("/send2 진입");
+		System.out.println("paramMap : " + paramMap);
+		System.out.println(shopDTO.toString());
+		System.out.println(shopDTO2);
+		
+		List list = getBagList(shopDTO2.getCount());
+		
+		return list;
 	}
 	
 	

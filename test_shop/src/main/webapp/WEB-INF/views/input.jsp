@@ -19,7 +19,7 @@
 </style>
 </head>
 <body>
-<a href="http://localhost:8080/send1?id=admin">abchor 태그를 이용</a>
+<a href="http://localhost:8080/send1?id=admin">abchor 태그를 이용</a> 
 <br>
 <form action="http://localhost:8080/send1">
 
