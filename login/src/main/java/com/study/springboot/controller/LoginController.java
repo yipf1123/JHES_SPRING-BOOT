@@ -38,13 +38,18 @@ public class LoginController {
 	}
 
 	@RequestMapping("/login_check")
-	public String login_check(HttpServletRequest request, @RequestParam("pw") String pw,
-			@RequestParam("id") String id,
+	public String login_check(HttpServletRequest request, 
+			/*
+			 * @RequestParam("pw") String pw,
+			 * 
+			 * @RequestParam("id") String id,
+			 */
 			Model model)
 
 	{
 		String nextPage = null;
-
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
 
 		String _id = "admin";
 		String _pw = "1234";
