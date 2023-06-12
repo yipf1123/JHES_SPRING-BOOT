@@ -29,7 +29,7 @@
 	SET writer = #{writer},
 		title = #{title},
 		content = #{content}
-	WHERE id= #{param4}
+	WHERE id= #{id}
 	</update>
 
 
