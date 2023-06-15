@@ -94,6 +94,7 @@ public class MyController {
 
 		return "list";
 	}
+	
 
 	@RequestMapping("/view")
 	public String view(Model model, @RequestParam("id") String id) {

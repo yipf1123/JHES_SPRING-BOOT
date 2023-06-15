@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.springboot.dao.UserDAO">
+	<insert id="insertUser" parameterType="string">
+		insert into tb_user (user_id, id, pw, name, join_date)
+		values (seq_tb_user.nextval, #{param1},null, null, sysdate)
+	</insert>
+	
+	
+	<select id="selectUser" resultType="UserDTO">
+		select user_id, id, pw, name, join_date
+		from tb_user
+	</select>
+</mapper>

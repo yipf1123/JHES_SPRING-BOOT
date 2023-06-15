@@ -12,22 +12,39 @@
 </head>
 <body>
 
-	<h1>Make it</h1> <br>
-	
+	<h1>${id}님의Make it</h1>
+	<br>
+
 	<br>
 	<form action="/serchM">
-	<select name="month">
-	<option value=""></option>
-	</select>
+		<select name="month">
+			<option value=""></option>
+		</select>
 	</form>
-	
+
 	<a href="/today">오늘</a>
-	<a href="/write"> + </a>
-	
+	<a href="/writeForm"> + </a>
+
 	<form action="/testForeach" id="myForm">
-	
+		<table>
+			<tr>
+				<td>날짜</td>
+				<td>할일</td>
+				<td>완료</td>
+			</tr>
+			<c:forEach var="dto" items="${list}">
+				<tr>
+					<td>${dto.day}</td>
+					<td>${dto.toDo}</td>
+					<td><input type="checkbox" name="check_status"
+						value="${dto.check_status}"
+						<c:if test="${dto.check_status == 'true'}"> 
+	checked="checked"</c:if>></td>
+				</tr>
+			</c:forEach>
+		</table>
 	</form>
-	
-	
+
+
 </body>
 </html>

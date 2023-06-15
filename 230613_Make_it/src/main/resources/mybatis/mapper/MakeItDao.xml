@@ -8,21 +8,28 @@
    <select id="listMI" parameterType="string" resultType="com.study.springboot.dto.MakeItDto">
    		select day, category, toDo, check_status 
    		from ToDoList
-   		where id = #{param1}
+   		where id = 'enshu'
    		order by day desc   
    </select>
    
-<!--    <select id="listMI_today" parameterType="string" resultType="com.study.springboot.dto.MakeItDto">
+	<select id="listMI_today" parameterType="string" resultType="com.study.springboot.dto.MakeItDto">
    		select check_status, category, toDo,
    		from ToDoList
-   		where id = #{param1} AND day = CURRENT_DATE
+   		where id = 'enshu' AND to_char(day, 'YYMMdd') = to_char(sysdate, 'YYMMdd')
    		order by day desc   
    </select>
-    -->
+   
+   	<select id="listMI_day" parameterType="java.time.LocalDate" resultType="com.study.springboot.dto.MakeItDto">
+   		select  category, toDo, check_status, day, do_id
+   		from ToDoList
+   		where id = 'enshu' AND day = #{_parameter}
+   		order by day desc   
+   </select>
+
    
   <insert id="writeMI" parameterType="MakeItDto">
   		insert into ToDoList (id, do_id, day, category, toDo)
-  		values (#{id}, ToDoList_seq.nextval, #{day}, #{category}, #{toDo})
+  		values ('enshu', seq_ToDoList.nextval, #{day}, #{category}, #{toDo})
   </insert>
   
 <!--     <insert id="writeMI_today" parameterType="MakeItDto">
@@ -35,6 +42,7 @@
 		where do_id = #{_parameter} 
 	</delete>
 	
+	
 	<update id="updateMI" parameterType="MakeItDto">
 		update ToDoList 
 		set 
@@ -46,5 +54,6 @@
 		do_id = #{id}	
 	</update>
    
+
    
    </mapper>
