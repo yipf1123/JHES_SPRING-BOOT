@@ -3,6 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.springboot.dao.UserDAO">
+	
 	<insert id="insertUser" parameterType="string">
 		insert into tb_user (user_id, id, pw, name, join_date)
 		values (seq_tb_user.nextval, #{param1},null, null, sysdate)
@@ -13,4 +14,49 @@
 		select user_id, id, pw, name, join_date
 		from tb_user
 	</select>
+	
+	
+	<update id="updateUser" parameterType="string">
+	update tb_user
+	set name = #{param1}
+	where user_id = '1'
+	</update>
+	
+	<!--application.p : mybatis.type-aliases-package=com.study.springboot.dto  -->
+	<delete id="deleteUser" parameterType="UserDTO">
+	delete tb_user
+	where user_id = #{user_id}
+	</delete>
+	
+	<insert id="joinUser" parameterType="UserDTO" >
+		insert into tb_user (user_id, id, pw, name, join_date)
+		values (seq_tb_user.nextval, #{id}, #{pw}, #{name}, sysdate)
+	</insert>
+	
+	<select id="loginCheck" parameterType="UserDTO" resultType="int">
+	select count(*) 
+	from tb_user
+	where id=#{id} and pw=#{pw}                        
+	</select>
+	
+	<select id="idCheck" parameterType="UserDTO" resultType="int">
+	select count(*) 
+	from tb_user
+	where id=#{id}                       
+	</select>
+	
+   <select id="selectUserInfo" 
+         parameterType="UserDTO"
+         resultType="UserDTO">
+      select 
+         user_id, 
+         id, 
+         pw, 
+         name, 
+         join_date
+      from tb_user
+      where id = #{id} and pw = #{pw}
+   </select>
+	
+	
 </mapper>

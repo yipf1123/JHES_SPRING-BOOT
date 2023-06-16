@@ -12,7 +12,6 @@ public class UserDTO {
 	join_date	date	DEFAULT sysdate
 	 */
 	
-
 	private int user_id;
 	private String id;
 	private String pw;
@@ -49,6 +48,12 @@ public class UserDTO {
 	}
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
+	}
+	
+	@Override
+	public String toString() {
+		return "UserDTO [user_id=" + user_id + ", id=" + id + ", pw=" + pw + ", name=" + name + ", join_date="
+				+ join_date + "]";
 	}
 	
 	
