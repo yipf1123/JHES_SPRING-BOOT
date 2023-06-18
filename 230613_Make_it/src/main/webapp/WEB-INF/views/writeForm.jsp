@@ -17,7 +17,6 @@
 
 <form  action="/write" method="post">
 <input type="hidden" name="day" id="day" value="${day}">
-카테고리 <input type="text" name="category"><br>
 할일 <input type="text" name="toDo"> <input type="submit" value="추가"><br><br>
 </form>
 
@@ -26,8 +25,7 @@
 	<tr>
 	<td><input type="checkbox" name="check_status" value="${dto.check_status}"
 	<c:if test="${dto.check_status == 'true'}"> checked="checked"</c:if>></td>
-	<td>${dto.category}</td>
-	<td>${dto.toDo}</td>
+	<td><span id="todo-${dto.do_id}" onclick="editToDo(${dto.do_id},${day})">${dto.toDo}</span></td>
 	<td><a href="/delete?do_id=${dto.do_id}&day=${dto.day}">삭제</a></td>
 	</tr>
 	</c:forEach>

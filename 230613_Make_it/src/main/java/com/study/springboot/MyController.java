@@ -59,20 +59,6 @@ public class MyController {
 	}
 	
 	
-	@RequestMapping("/serchM")
-	public String serchMonth(Model model,
-			@ModelAttribute MakeItDto dto) {
-		System.out.println("serchM 접속완료");
-		return "list";
-	}
-	
-	@RequestMapping("/today")
-	public String today(Model model) {
-		List list = dao.listMI_today();
-		model.addAttribute("list", list);
-		return "today";
-	}
-	
 	@RequestMapping("/writeForm")
 	public String writeForm() {
 		return "writeForm";
@@ -120,6 +106,26 @@ public class MyController {
 	return "redirect:/dayform?day=" + dto.getDay();
 	}
 	
+	
+	@RequestMapping("/today")
+	public String today(Model model) {
+		List list = dao.listMI_today();
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "today";
+	}
 
+	
+	@RequestMapping("/update")
+	public String update(Model model,
+			@ModelAttribute MakeItDto dto) {
+		System.out.println("update 접속완료");
+		System.out.println("Day : " + dto.getDay());
+		System.out.println("ToDo : " + dto.getToDo());
+		System.out.println("Do_id : " + dto.getDo_id());
+		int result = dao.updateMI(dto);
+
+		return "redirect:/dayform?day=" + dto.getDay();
+	}
 
 }

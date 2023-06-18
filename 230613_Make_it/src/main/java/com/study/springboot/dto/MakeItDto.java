@@ -1,14 +1,14 @@
 package com.study.springboot.dto;
 
-import java.time.LocalDate;
+import java.sql.Date;
+
 
 public class MakeItDto {
 	
 	private String id;
 	private int pw;
 	private int do_id;
-	private LocalDate day;
-	private String category;
+	private Date day;
 	private String toDo;
 	private boolean check_status;
 	
@@ -30,18 +30,13 @@ public class MakeItDto {
 	public void setDo_id(int do_id) {
 		this.do_id = do_id;
 	}
-	public LocalDate getDay() {
+	public Date getDay() {
 		return day;
 	}
-	public void setDay(LocalDate day) {
+	public void setDay(Date day) {
 		this.day = day;
 	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
+	
 	public String getToDo() {
 		return toDo;
 	}
