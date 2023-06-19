@@ -1,51 +1,46 @@
-const day = document.getElementById("dayform");
+const dayform = document.getElementById("dayform");
 
 
-day.addEventListener("change", function(){
-	day.submit();
+dayform.addEventListener("change", function(){
+	dayform.submit();
 })
 
-day.addEventListener("submit", function(event) {
+dayform.addEventListener("submit", function(event) {
     event.preventDefault();
  })
  
  
- function editToDo(do_id,day) {
-  const todoElement = document.getElementById(`todo-${do_id}`);
-  const todoText = todoElement.innerText;
+let todo = document.querySelectorAll(".todo");
+let todo_text = document.querySelectorAll(".todo_text");
+let upd_bt = document.querySelectorAll(".upd_bt");
+let do_id =document.querySelectorAll(".do_id");
+let date = document.querySelector("#day");
 
-  // 입력 필드 생성
-  const inputElement = document.createElement('input');
-  inputElement.value = todoText;
+for(let i=0; i<todo.length; i++){	
+todo[i].addEventListener("click",function(){
+	
+	todo[i].style.display = "none";
+	todo_text[i].style.display = "block";
+	upd_bt[i].style.display = "block";	
+})}
 
-  // 수정 버튼 생성
-  const updateButton = document.createElement('button');
-  updateButton.innerText = '수정';
- 
+for(let i=0; i<upd_bt.length; i++){	
+upd_bt[i].addEventListener("click",function(){
+	
+	let do_Id = do_id[i].value;
+	let content = todo_text[i].value;
+	let day = date.value;
+	console.log("do_Id : ", do_Id .value);
+	console.log("content : ", todo_text.value);
+	console.log("day : ", day.value);
+	
+	update(do_Id, content, day );
+	
 
-  
- updateButton.addEventListener('click', function() {
-    
-   const updatedTodo = inputElement.value;
- 
-  console.log("updatedTodo : " , updatedTodo);
-  console.log("do_id : " , do_id);
-  console.log("day : ", day)
-/*  update(updatedTodo, do_id);*/
-  
+})}
 
-    
-  });
 
-  // span 요소를 입력 필드와 수정 버튼으로 대체
-  todoElement.replaceWith(inputElement, updateButton);
 
-  // 입력 필드에 포커스 설정
-  inputElement.focus();
-  
-
-}
-
-function update(updatedTodo, do_id) {
-  window.location.href = "/update";
+function update(a,b,c) {
+  window.location.href = "/update?do_id="+a+"&toDo="+b+"&day="+c;
 }

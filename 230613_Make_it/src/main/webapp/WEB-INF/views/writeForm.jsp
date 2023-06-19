@@ -12,7 +12,7 @@
 <body>
  
 <form id="dayform" action="/dayform" method="post">
-날짜 <input type="date" name="day" value="${day}"><br>
+날짜 <input type="date" name="day"  value="${day}"><br>
 </form>
 
 <form  action="/write" method="post">
@@ -25,7 +25,13 @@
 	<tr>
 	<td><input type="checkbox" name="check_status" value="${dto.check_status}"
 	<c:if test="${dto.check_status == 'true'}"> checked="checked"</c:if>></td>
-	<td><span id="todo-${dto.do_id}" onclick="editToDo(${dto.do_id},${day})">${dto.toDo}</span></td>
+	
+	
+	<td><span class="todo" style="display: block;">${dto.toDo}</span>
+	<input class="todo_text" type="text" value="${dto.toDo}" style="display: none;"><button class="upd_bt" style="display: none;">수정</button> </td>
+	<input class="do_id" type="hidden" value="${dto.do_id}">
+	
+	
 	<td><a href="/delete?do_id=${dto.do_id}&day=${dto.day}">삭제</a></td>
 	</tr>
 	</c:forEach>
@@ -34,5 +40,8 @@
 		<a href="/list">목록으로</a>
 	<!-- js -->
 	<script src="writeForm.js"></script>
+	
+	
+	
 </body>
 </html>

@@ -48,7 +48,7 @@
 		set 
 		toDo = #{toDo}
 		where
-		do_id = #{id}	
+		do_id = #{do_id}	
 	
 	</update>
    

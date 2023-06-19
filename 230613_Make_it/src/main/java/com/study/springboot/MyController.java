@@ -120,9 +120,9 @@ public class MyController {
 	public String update(Model model,
 			@ModelAttribute MakeItDto dto) {
 		System.out.println("update 접속완료");
-		System.out.println("Day : " + dto.getDay());
-		System.out.println("ToDo : " + dto.getToDo());
 		System.out.println("Do_id : " + dto.getDo_id());
+		System.out.println("ToDo : " + dto.getToDo());
+		System.out.println("Day : " + dto.getDay());
 		int result = dao.updateMI(dto);
 
 		return "redirect:/dayform?day=" + dto.getDay();
