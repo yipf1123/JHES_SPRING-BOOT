@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   <mapper namespace="com.study.springboot.dao.I_MakeItDao">
+   
+   <select id="listMI" parameterType="string" resultType="com.study.springboot.dto.MakeItDto">
+   		select day, toDo, check_status 
+   		from ToDoList
+   		where id = 'enshu'
+   		order by day desc   
+   </select>
+   
+	<select id="listMI_today" parameterType="string" resultType="com.study.springboot.dto.MakeItDto">
+   		select check_status, toDo, day
+   		from ToDoList
+   		where id = 'enshu' AND to_char(day, 'YYMMdd') = to_char(sysdate, 'YYMMdd')
+   		order by day desc   
+   </select>
+   
+   	<select id="listMI_day" parameterType="java.sql.Date" resultType="com.study.springboot.dto.MakeItDto">
+   		select  toDo, check_status, day, do_id
+   		from ToDoList
+   		where id = 'enshu' AND day = #{_parameter}
+   		order by day desc   
+   </select>
+
+   
+  <insert id="writeMI" parameterType="MakeItDto">
+  		insert into ToDoList (id, do_id, day, toDo)
+  		values ('enshu', seq_ToDoList.nextval, #{day}, #{toDo})
+  </insert>
+  
+<!--     <insert id="writeMI_today" parameterType="MakeItDto">
+  		insert into ToDoList (id, do_id, day, category, toDo, check_status)
+  		values (#{id}, ToDoList_seq.nextval, CURRENT_DATE, #{category}, #{toDo}, #{check_status})
+  </insert> -->
+   
+   	<delete id="deleteMI" parameterType="string">
+		delete from ToDoList
+		where do_id = #{_parameter} 
+	</delete>
+	
+	
+	<update id="updateMI" parameterType="MakeItDto">
+		update ToDoList 
+		set 
+		toDo = #{toDo}
+		where
+		do_id = #{do_id}	
+	
+	</update>
+   
+
+   
+   </mapper>
