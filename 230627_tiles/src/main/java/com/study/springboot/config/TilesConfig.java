@@ -32,10 +32,5 @@ public class TilesConfig {
         tilesViewResolver.setViewClass(TilesView.class);
         tilesViewResolver.setOrder(1); //뷰 우선순위
         return tilesViewResolver;
-    }
-	
-	
-	
-	
-	
+    }	
 }

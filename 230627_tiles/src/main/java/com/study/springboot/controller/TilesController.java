@@ -18,6 +18,7 @@ public class TilesController {
 		
 		return "viewList2";
 	}
-	
-	
+		
 }
+
+

@@ -20,8 +20,10 @@
 		<put-attribute name="main" value="/WEB-INF/views/content/list.jsp" />
 	</definition>
 	
-		<definition name="viewList2" extends="base">
+	<definition name="viewList2" extends="base">
 		<put-attribute name="title" value="list2.jsp 보기" />
 		<put-attribute name="main" value="/WEB-INF/views/content/list2.jsp" />
 	</definition>
+	
 </tiles-definitions>
+
