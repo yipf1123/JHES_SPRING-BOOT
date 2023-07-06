@@ -1,0 +1,7 @@
+jQuery 사용
+컨트롤러에 ajax
+컨트롤러는 html 아닌 json return
+js에서 받아서 html 추가
+
+회원가입; 등록된 아이디를 찾는 기능
+ajax로 구현

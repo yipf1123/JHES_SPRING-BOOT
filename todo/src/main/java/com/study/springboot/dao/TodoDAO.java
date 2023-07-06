@@ -14,4 +14,9 @@ public interface TodoDAO {
 	
 	List<TodoDTO> selectTodo();
 	
+	TodoDTO detailTodo (int todo_id);
+	
+	int updateTodo(TodoDTO todoDTO);
+	int deleteTodo(TodoDTO todoDTO);
+	
 }

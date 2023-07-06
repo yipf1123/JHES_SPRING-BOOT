@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.springboot.dao.TodoDAO">
+
+	<insert id="insertTodo" parameterType="TodoDTO">
+		insert into tb_todo(todo_id, todo, due_date, user_id)
+		values (seq_tb_todo.nextval, #{todo}, #{due_date},#{user_id})
+	</insert>
+
+
+	<select id="totalCount" resultType="int">
+	select count(*) from tb_todo
+	</select>
+
+	<select id="selectTodo" parameterType="TodoDTO" resultType="TodoDTO">
+		SELECT *
+		FROM ( 
+			SELECT rownum AS rnum,
+       			   todo_id,
+        		   todo,
+        		   due_date,
+        		   done_date,
+        		   u.user_id,
+        		   u.name
+   	 		FROM
+        		   tb_todo t
+        	LEFT OUTER JOIN tb_user u ON(u.user_id = t.user_id)
+        	ORDER BY todo_id ASC
+        	)
+		WHERE rnum <![CDATA[>=]]> #{startNum}
+		  AND rnum <![CDATA[<=]]> #{endNum}
+	</select>
+
+
+	<select id="detailTodo" parameterType="int" resultType="TodoDTO">
+		select
+			todo_id,
+			todo,
+			due_date,
+			done_date,
+			user_id
+		from
+			tb_todo
+		WHERE
+			todo_id = #{param1}
+	</select>
+	
+	<update id="updateTodo" parameterType="TodoDTO">
+	/*todo.updateTodo*/
+	update tb_todo
+	set
+		<if test="todo != null and due_date != null">
+		todo = #{todo},
+		due_date = #{due_date}
+		</if>
+		
+		<if test="checked == true">
+		done_date = sysdate
+		</if>
+		
+		<if test="(todo == null or due_date == null) and checked != true">
+		done_date = null
+		</if>
+		
+		
+<!-- 		<choose>
+		<when test="todo != null and due_date != null">
+		todo = #{todo},
+		due_date = #{due_date}
+		</when>
+		<otherwise>
+		done_date = sysdate
+		</otherwise>
+		</choose> -->
+
+	where 
+	 todo_id = #{todo_id}
+	
+	</update>
+	
+	
+	<delete id="deleteTodo" parameterType="TodoDTO">
+	delete tb_todo
+	where 
+	todo_id=#{todo_id}
+	
+	</delete>
+
+
+</mapper>

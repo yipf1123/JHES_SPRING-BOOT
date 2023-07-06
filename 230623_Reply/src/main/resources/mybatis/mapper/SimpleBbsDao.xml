@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.springboot.dao.ISimpleBbsDao">
+	
+	<resultMap id="bbsResult" type="SimpleBbsDto">
+		<result column="id" property="id" />
+		<result column="writer" property="writer" />
+	</resultMap>
+	
+	<select id="listDao2" resultMap="bbsResult">
+		select * from simple_bbs
+	</select>
+	
+	<select id="listDao" resultType="com.study.springboot.dto.SimpleBbsDto">
+		select 
+			* 
+		from 
+			simple_bbs
+		order by 
+			id desc
+	</select>
+
+	<select id="test_listDao" resultType="com.study.springboot.dto.SimpleBbsDto">
+			select 
+				* 
+			from 
+				simple_bbs
+			where
+				<![CDATA[ id < 3 ]]>
+			order by 
+				id desc
+	</select>
+
+	<select id="viewDao" 
+		parameterType="string"
+		resultType="com.study.springboot.dto.SimpleBbsDto">
+		
+		select * from simple_bbs where id = #{param1}
+	</select>
+
+	<update id="writeDao" parameterType="SimpleBbsDto">
+		insert into simple_bbs (id, writer, title, content, parent_id)
+		values (simple_bbs_seq.nextval, #{writer}, #{title}, #{content}, #{parent_id})
+	</update>
+	
+	<delete id="deleteDao" parameterType="string">
+		DELETE FROM simple_bbs WHERE id = #{_parameter}
+	</delete>
+	
+	<update id="updateDao" parameterType="SimpleBbsDto">
+		UPDATE 
+				simple_bbs
+		   SET 
+				writer = #{writer},
+				title = #{title},
+				content = #{content}
+		 WHERE 
+		 		id = #{id}
+	</update>
+	
+	
+	<select id="testIf"
+		parameterType="SimpleBbsDto"
+		resultType="SimpleBbsDto">
+		
+		select 
+			* 
+		from 
+			simple_bbs
+		<where>
+			<if test=" title != null and title != '' ">
+				and upper(title) = upper(#{title})
+			</if>
+			<if test=" writer != null and writer != '' ">
+				<!-- and upper(writer) = upper(#{writer}) -->
+				and upper(writer) like '%' || upper(#{writer}) || '%'
+		 	</if>
+		</where>
+		order by 
+			id desc
+			
+	</select>
+	
+	<select id="testChoose"
+		parameterType="SimpleBbsDto"
+		resultType="SimpleBbsDto">
+		
+		SELECT 
+			* 
+		FROM 
+			simple_bbs
+		<where>
+			<choose>
+				<when test=" title != null and title != '' ">
+					AND title = #{title}
+				</when>
+				<otherwise>
+					AND title IS NULL
+				</otherwise>
+			</choose>
+		</where>
+		
+	</select>
+	
+	
+	<select id="testForeach"
+		parameterType="SimpleBbsDto"
+		resultType="SimpleBbsDto">
+		
+		SELECT 
+			* 
+		FROM 
+			simple_bbs
+		<where>
+			<if test="chk != null">
+				id in 
+				<foreach 
+					item="value" 
+					collection="chk" 
+					open="("
+					separator=","
+					close=")">
+					
+					#{value}
+					
+				</foreach>
+			</if>
+		</where>
+	</select>
+</mapper>

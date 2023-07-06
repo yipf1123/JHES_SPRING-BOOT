@@ -28,5 +28,25 @@ public class TodoServiceImpl implements TodoService{
 		return list;
 	}
 
+	@Override
+	public TodoDTO detailTodo(int todo_id) {
+		
+		TodoDTO todoDTO = todoDAO.detailTodo(todo_id);
+		
+		return todoDTO;
+	}
+
+	@Override
+	public int updateTodo(TodoDTO todoDTO) {
+		
+		return todoDAO.updateTodo(todoDTO);
+	}
+
+	@Override
+	public int deleteTodo(TodoDTO todoDTO) {
+
+		return  todoDAO.deleteTodo(todoDTO);
+	}
+
 
 }

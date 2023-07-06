@@ -1,0 +1,14 @@
+원글
+
+id
+writer 
+title 
+content
+parent_id null  
+
+답글
+id
+writer
+title
+content
+parent_id

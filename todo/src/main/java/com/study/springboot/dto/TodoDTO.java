@@ -9,6 +9,8 @@ public class TodoDTO {
 	private Date due_date;	//마감 예정일
 	private Date done_date;	//실제 마감일
 	private int user_id;
+	private boolean checked;
+	private String name;
 	
 	
 	public int getTodo_id() {
@@ -42,12 +44,28 @@ public class TodoDTO {
 		this.user_id = user_id;
 	}
 	
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+		
+
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public String toString() {
 		return "TodoDTO [todo_id=" + todo_id + ", todo=" + todo + ", due_date=" + due_date + ", done_date=" + done_date
-				+ ", user_id=" + user_id + "]";
+				+ ", user_id=" + user_id + ", checked=" + checked + "]";
 	}
+	
+
 	
 	
 	
