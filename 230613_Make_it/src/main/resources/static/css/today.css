@@ -19,8 +19,10 @@ body{
 
 .box .btn{
   width: 450px;
-  text-align: right;
+ /*  text-align: right; */
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .box .btn a{
@@ -34,12 +36,13 @@ margin-right: 10px;
 	min-height: 700px;
 	background-color: #F8C471;
 	border-radius: 2%;
+
 }
 
 
 
 .container .title{
-	margin : 20px;
+	margin : 30px;
 	text-align: center;
 }
 
@@ -48,11 +51,11 @@ margin-right: 10px;
 }
 
 .container .info {
-	margin: 10px;
+	margin: 10px 25px;
 }
 
 hr{
-	width: 420px;
+	width: 400px;
 	height: 1px;
 	background-color: black;
 	border: none;
@@ -60,7 +63,13 @@ hr{
   	margin-right: auto;
 }
 
-.container .table{
-	margin: 20px;
+.container .table {
+	margin: 25px;
+
+	
+}
+.container .table tr{
+	font-size : 20px;
+	line-height: 50px;
 }
 
